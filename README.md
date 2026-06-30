@@ -1,8 +1,8 @@
 # Agentic AI Threat Hunting Tool
 
-An agentic threat hunting tool that turns an analyst's hypothesis into a scoped investigation against Microsoft Azure telemetry. You state what you suspect in natural language, and the agent reasons about where the evidence would live, constructs a KQL query, pulls the matching records from your Log Analytics workspace, and runs a grounded analysis pass that returns findings mapped to MITRE ATT&CK, scored for confidence, and enriched with IOCs and recommended response actions.
+An agentic threat hunting tool that turns an analyst's hypothesis into a scoped investigation against Microsoft Azure telemetry. You state what you suspect in natural language. The agent reasons about where the evidence would live, builds a KQL query, and pulls the matching records from your Log Analytics workspace. It then runs a grounded analysis pass that returns findings mapped to MITRE ATT&CK, scored for confidence, and enriched with IOCs and recommended response actions.
 
-It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high signal source, triage what comes back, and decide whether to pivot, escalate, or stand down. The agent handles the mechanical parts of that loop, the table selection, the query construction, the first pass triage across hundreds of events, so the analyst spends their attention on the findings rather than on writing KQL and eyeballing raw logs.
+It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high signal source, triage what comes back, and decide whether to pivot, escalate, or stand down. The agent handles the mechanical parts of that loop. It picks the table, constructs the query, and runs first pass triage across hundreds of events, so you spend your attention on the findings instead of writing KQL and eyeballing raw logs.
 
 <img width="907" height="1009" alt="Screenshot 2026-06-29 120741" src="https://github.com/user-attachments/assets/27f4a92d-8cb3-41dd-9fc0-3b02cbd7d868" />
 
@@ -51,10 +51,6 @@ This is a real run of the tool. Each step shows what the analyst sees and what t
 
  <img width="924" height="606" alt="Screenshot 2026-06-29 202035" src="https://github.com/user-attachments/assets/90d92d36-a031-44cb-bdf3-d6a5b57335f9" />
 
-
-The agent greets you and asks what you want to do. In this run the analyst typed:
-
-"I'm worried someone has logged into our tenant in the last day or so, or some other malicious activity has happened."
 
 Behind the scenes this becomes the input to the planning step. Rather than searching blindly, the agent will first reason about where to look and how to scope the search.
 
