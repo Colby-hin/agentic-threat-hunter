@@ -46,7 +46,6 @@ Color coded display + Saved to _threats.jsonl
 * Real time querying of Azure Log Analytics, covering Microsoft Defender for Endpoint and Azure AD sign in logs.
 * Automated MITRE ATT&CK mapping with confidence scoring and extracted indicators of compromise.
 * Actionable recommendations for each finding.
-* Secure by design. API keys and workspace IDs are never committed.
 
 ---
 
