@@ -54,7 +54,7 @@ This is a real run of the tool. Each step shows what the analyst sees and what t
 
 The agent greets you and asks what you want to do. In this run the analyst typed:
 
-> "I'm worried someone has logged into our tenant in the last day or so, or some other malicious activity has happened."
+"I'm worried someone has logged into our tenant in the last day or so, or some other malicious activity has happened."
 
 Behind the scenes this becomes the input to the planning step. Rather than searching blindly, the agent will first reason about where to look and how to scope the search.
 
@@ -75,7 +75,7 @@ The agent sends the request to the planning model. Using OpenAI function calling
 * **Fields:** TimeGenerated, UserPrincipalName, OperationName, Category, ResultSignature, ResultDescription, AppDisplayName, IPAddress, LocationDetails
 It also returned a rationale, which the tool prints so the analyst can sanity check the agent's thinking before anything runs:
 
-> "User is concerned about tenant sign ins in the last day. SigninLogs is the high signal table for Azure AD sign ins. 24 hour window matches 'last day'. Fields chosen capture time, user, operation, success or failure, app, IP and location to spot suspicious or anomalous sign ins. No specific user or device was provided so query is tenant wide."
+"User is concerned about tenant sign ins in the last day. SigninLogs is the high signal table for Azure AD sign ins. 24 hour window matches 'last day'. Fields chosen capture time, user, operation, success or failure, app, IP and location to spot suspicious or anomalous sign ins. No specific user or device was provided so query is tenant wide."
 
 This rationale step is deliberate. The agent has to justify its plan in plain language, which makes its reasoning auditable.
 
