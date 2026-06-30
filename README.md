@@ -141,7 +141,7 @@ The terminal showing "Selected model is valid", "Initiating cognitive threat hun
 | `MODEL_MANAGEMENT.py` | Token counting, cost estimation, and the interactive, tier aware model picker. |
 | `GUARDRAILS.py` | The allow lists for tables, fields, and models, plus the validation functions that enforce them. |
 | `UTILITIES.py` | Sanitizing the query plan and displaying the plan, rationale, and findings. |
-| `_keys.py` | Your secrets. Not committed. See setup below. |
+
 
 The design choice worth calling out is the separation of concerns. Planning the query, validating it, fetching the data, controlling cost, and analyzing the results are all distinct steps owned by distinct modules. That makes each piece easy to reason about and easy to change on its own.
 
