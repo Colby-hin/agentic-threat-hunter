@@ -10,10 +10,6 @@ It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high s
 
 ## The Core Idea
 
-The interesting part of this project is not that it sends logs to a language model. The interesting part is how it keeps the model on a leash.
-
-A naive version of this tool would ask the model to write a query and then run whatever it produced. That is fragile and unsafe. This tool splits the work into two separate model calls with a real data fetch in between, and it never lets the model write raw query code.
-
 1. **Plan.** The model reads your request and, using OpenAI function calling, fills in a fixed set of parameters: which table to search, which fields to return, who or what to scope to, and how far back to look. It also explains its reasoning. It does not author the query itself.
 2. **Fetch.** Your own code takes those parameters and slots them into a safe, pre written KQL template, then runs that against Azure. The model picks the ingredients. The code writes the recipe.
 3. **Analyze.** The logs that come back are handed to a second model call along with a prompt that is tailored to the specific table being hunted. The model is told to stay grounded in the actual log data and to return its findings in a strict JSON structure.
