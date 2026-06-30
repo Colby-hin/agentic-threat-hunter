@@ -18,22 +18,17 @@ That separation is the whole point. The model reasons about intent and evidence.
 
 ## How It Works
 
-```
-User Input (Natural Language)
-        |
-GPT plans the query: table + fields + scope + time window (via Function Calling)
-        |
-Show plan + rationale to analyst  ->  Validate table/fields against allow list
-        |
-Query Azure Log Analytics Workspace (real MDE & Azure AD logs)
-        |
-Count tokens + estimate cost  ->  Analyst confirms or picks a model
-        |
-Returned logs  ->  GPT Threat Analysis Engine (table specific prompt)
-        |
-Structured Findings: Title, MITRE Mapping, Confidence, IOCs, Recommendations
-        |
-Color coded display + Saved to _threats.jsonl
+```mermaid
+flowchart TD
+    A[Analyst Hunt Request] --> B[Query Planning<br/>via OpenAI Function Calling]
+    B --> C[Guardrail Validation<br/>Allowed Tables & Fields]
+    C --> D[Query Azure Log Analytics<br/>MDE & Azure AD Logs]
+    D --> E{Records<br/>returned?}
+    E -->|No| F[Exit cleanly]
+    E -->|Yes| G[Token Count & Cost Estimate<br/>Analyst confirms or picks model]
+    G --> H[AI Threat Analysis<br/>Table-specific prompt]
+    H --> I[Structured Findings<br/>MITRE, Confidence, IOCs, Recommendations]
+    I --> J[Color-coded Display + Save to _threats.jsonl]
 ```
 
 ## Key Features
