@@ -1,6 +1,6 @@
 # Agentic AI Threat Hunting Tool
 
-An agentic threat hunting tool that turns an analyst's hypothesis into a scoped investigation against Microsoft Azure telemetry. You state what you suspect in natural language, and the agent reasons about where the evidence would live, constructs a parameterized KQL query, pulls the matching records from your Log Analytics workspace, and runs a grounded analysis pass that returns findings mapped to MITRE ATT&CK, scored for confidence, and enriched with IOCs and recommended response actions.
+An agentic threat hunting tool that turns an analyst's hypothesis into a scoped investigation against Microsoft Azure telemetry. You state what you suspect in natural language, and the agent reasons about where the evidence would live, constructs a KQL query, pulls the matching records from your Log Analytics workspace, and runs a grounded analysis pass that returns findings mapped to MITRE ATT&CK, scored for confidence, and enriched with IOCs and recommended response actions.
 
 It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high signal source, triage what comes back, and decide whether to pivot, escalate, or stand down. The agent handles the mechanical parts of that loop, the table selection, the query construction, the first pass triage across hundreds of events, so the analyst spends their attention on the findings rather than on writing KQL and eyeballing raw logs.
 
@@ -40,7 +40,7 @@ Color coded display + Saved to _threats.jsonl
 
 * Natural language threat hunting. You describe the concern in normal words, for example "someone may have logged into our tenant in the last day."
 * Intelligent table and field selection using OpenAI function calling.
-* Code authored, parameterized KQL. The model chooses parameters, never raw queries.
+* Code authored KQL. A pre written query populated with validated values, never raw queries written by the model.
 * Allow list validation of tables and fields before any query runs.
 * Token counting and cost estimation with interactive, tier aware model selection.
 * Real time querying of Azure Log Analytics, covering Microsoft Defender for Endpoint and Azure AD sign in logs.
@@ -144,7 +144,7 @@ The terminal showing "Selected model is valid", "Initiating cognitive threat hun
 | --- | --- |
 | `_main.py` | The orchestrator. Sets up the Azure and OpenAI clients, then runs the pipeline stage by stage. |
 | `PROMPT_MANAGEMENT.py` | All prompts and the function calling schema. Holds the planner prompt, the analyst prompt, the per table specialist prompts, the output schema, and the tool definition. |
-| `EXECUTOR.py` | The engine. Gets the query plan from the model, builds and runs the parameterized KQL against Azure, and runs the analysis call. |
+| `EXECUTOR.py` | The engine. Gets the query plan from the model, builds and runs a pre written query populated with validated values against Azure, and runs the analysis call. |
 | `MODEL_MANAGEMENT.py` | Token counting, cost estimation, and the interactive, tier aware model picker. |
 | `GUARDRAILS.py` | The allow lists for tables, fields, and models, plus the validation functions that enforce them. |
 | `UTILITIES.py` | Sanitizing the query plan and displaying the plan, rationale, and findings. |
