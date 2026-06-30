@@ -14,7 +14,6 @@ It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high s
 2. **Fetch.** Your own code takes those parameters and slots them into a safe, pre written KQL template, then runs that against Azure. The model picks the ingredients. The code writes the recipe.
 3. **Analyze.** The logs that come back are handed to a second model call along with a prompt that is tailored to the specific table being hunted. The model is told to stay grounded in the actual log data and to return its findings in a strict JSON structure.
 
-That separation is the whole point. The model reasons about intent and evidence. The code stays in control of anything that touches your environment.
 
 ## How It Works
 
@@ -46,7 +45,7 @@ flowchart TD
 
 ## A Full Run, Stage by Stage
 
-This is a real run of the tool. Each step shows what the analyst sees and what the system is doing underneath, so you can follow the whole pipeline from a vague worry to a set of concrete findings.
+This is a real run of the tool. Each step shows what the analyst sees and what the system is doing underneath
 
 ### 1. You start with a plain English worry
 
