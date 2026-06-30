@@ -48,6 +48,8 @@ Color coded display + Saved to _threats.jsonl
 * Actionable recommendations for each finding.
 * Secure by design. API keys and workspace IDs are never committed.
 
+---
+
 ## A Full Run, Stage by Stage
 
 This is a real run of the tool. Each step shows what the analyst sees and what the system is doing underneath, so you can follow the whole pipeline from a vague worry to a set of concrete findings.
@@ -63,34 +65,36 @@ The agent greets you and asks what you want to do. In this run the analyst typed
 
 Behind the scenes this becomes the input to the planning step. Rather than searching blindly, the agent will first reason about where to look and how to scope the search.
 
+---
+
+
 ### 2. The agent plans the query and explains itself
 
 <img width="1372" height="484" alt="Screenshot 2026-06-29 202209" src="https://github.com/user-attachments/assets/89ebaa5c-6ab1-467d-a134-0d54c37248e9" />
+
+
+<img width="1862" height="526" alt="Screenshot 2026-06-29 202252" src="https://github.com/user-attachments/assets/eda2aab7-d361-4bb8-b41a-322637a5db8c" />
 
 The agent sends the request to the planning model. Using OpenAI function calling, the model has to return a complete, structured query plan. In this run it chose:
 
 * **Table:** SigninLogs
 * **Time range:** 24 hours
 * **Fields:** TimeGenerated, UserPrincipalName, OperationName, Category, ResultSignature, ResultDescription, AppDisplayName, IPAddress, LocationDetails
-<img width="1348" height="581" alt="Screenshot 2026-06-29 202232" src="https://github.com/user-attachments/assets/03659277-42e9-4a90-b399-05a560f722a8" />
-
-
 It also returned a rationale, which the tool prints so the analyst can sanity check the agent's thinking before anything runs:
 
-
 > "User is concerned about tenant sign ins in the last day. SigninLogs is the high signal table for Azure AD sign ins. 24 hour window matches 'last day'. Fields chosen capture time, user, operation, success or failure, app, IP and location to spot suspicious or anomalous sign ins. No specific user or device was provided so query is tenant wide."
-<img width="1862" height="526" alt="Screenshot 2026-06-29 202252" src="https://github.com/user-attachments/assets/eda2aab7-d361-4bb8-b41a-322637a5db8c" />
 
-This rationale step is deliberate. The agent has to justify its plan in plain language, which makes its reasoning auditable instead of a black box.
+This rationale step is deliberate. The agent has to justify its plan in plain language, which makes its reasoning auditable.
+
+---
 
 ### 3. The guardrail validates the plan
 
+<img width="1862" height="144" alt="Screenshot 2026-06-29 202252" src="https://github.com/user-attachments/assets/43ba1ac5-6047-439e-af7b-fee42028fa26" />
+
 Before any query runs, the chosen table and fields are checked against an allow list. If the model had hallucinated a field name or picked a table that is not permitted, the program stops immediately. The model proposes, the code enforces.
 
-```
-Validating Tables and Fields...
-Fields and tables have been validated and comply with the allowed guidelines.
-```
+---
 
 ### 4. The query is built and run
 
@@ -99,21 +103,26 @@ Fields and tables have been validated and comply with the allowed guidelines.
 
 If zero records come back, the tool exits cleanly rather than wasting a model call.
 
+---
+
 ### 5. Tokens, cost, and model choice
 
-> The terminal showing "Model limits and estimated total cost" with the four model rows, the green Safe checks, and the "Continue with 'gpt-5-mini'?" prompt.
 <img width="1114" height="369" alt="Screenshot 2026-06-29 202451" src="https://github.com/user-attachments/assets/3935b1d7-cddb-46ce-bc27-6e70b47c09f1" />
 
 Logs get big fast, so before spending anything the tool counts the tokens with tiktoken and estimates what each available model would cost. It checks two separate limits for every model: the context window (can the input even fit) and your account's tokens per minute rate limit. Everything is color coded, and you get to switch models before committing.
 
 This is a second human checkpoint, this time on cost. In this run the full tenant wide hunt over 1026 sign in events cost about four cents.
 
+---
+
 ### 6. The hunt
 
-> The terminal showing "Selected model is valid", "Initiating cognitive threat hunt against target logs", and "Cognitive hunt complete. Took 165.48 seconds and found 3 potential threat(s)!" 
+
 <img width="911" height="588" alt="Screenshot 2026-06-29 202832" src="https://github.com/user-attachments/assets/2cae95d2-6c58-4e31-8ceb-f09c617aa6cb" />
 
+The terminal showing "Selected model is valid", "Initiating cognitive threat hunt against target logs", and "Cognitive hunt complete. Took 165.48 seconds and found 3 potential threats!"
 
+---
 
 ### 7. The three findings from this run were:
 
