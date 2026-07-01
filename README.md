@@ -122,4 +122,4 @@ The CLI is where this engine started, but every hunt above can also be triggered
 
  ---
  
-**Dashboard repo:** [link to your dashboard repo here]
+**Dashboard repo:** https://github.com/Colby-hin/agentic-soc-dashboard
