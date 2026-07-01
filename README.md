@@ -6,16 +6,19 @@ It is built for the Tier 2 and Tier 3 workflow: scope the hunt, query the high s
  
 This engine runs two ways. As a standalone CLI (`_main.py`) — the original interactive tool, results printed to the terminal and logged to `_threats.jsonl`. Or as a REST API (`api.py`) that exposes the same pipeline over HTTP, persists results to a SQLite database instead of a flat file, and powers a companion web dashboard.
  
-<img width="907" height="1009" alt="Screenshot 2026-06-29 120741" src="https://github.com/user-attachments/assets/27f4a92d-8cb3-41dd-9fc0-3b02cbd7d868" />
+
+
+<img width="907" height="1009" alt="Screenshot 2026-06-29 120741" src="https://github.com/user-attachments/assets/f316667b-5b3c-4e49-9109-e3e403cf54c6" />
+
 
 ---
 
-**Platform stack**
+## Platform stack
 - Azure Log Analytics
 - Microsoft Defender for Endpoint
 - OpenAI API
 - Python + FastAPI
-Integrated with a companion Next.js dashboard, which drives this engine over its REST API.
+Integrated with a companion Next.js dashboard
  
  
  
@@ -42,9 +45,8 @@ flowchart TD
  
 ## Key Features
  
-* Natural language threat hunting. You describe the concern in normal words, for example "someone may have logged into our tenant in the last day."
+* Natural language threat hunting.
 * Intelligent table and field selection using OpenAI function calling.
-* Code authored KQL. A pre written query populated with validated values, never raw queries written by the model.
 * Allow list validation of tables and fields before any query runs.
 * Token counting and cost estimation, with real per-hunt token usage and dollar cost captured from the model's actual API response and persisted alongside each case.
 * Real time querying of Azure Log Analytics, covering Microsoft Defender for Endpoint and Azure AD sign in logs.
