@@ -118,7 +118,7 @@ If zero records come back, the tool exits cleanly rather than wasting a model ca
  
 ## Web Dashboard
  
-The CLI is where this engine started, but every hunt above can also be triggered from A companion Next.js dashboard that sits on top of this engine's REST API (`api.py`), giving an analyst a full case-management workflow: run hunts from a web form instead of a prompt, track each finding as a case with a status (open, investigating, resolved, ignored), attach analyst notes, view MITRE ATT&CK patterns aggregated across every case, and see real AI cost tracked per investigation.
+The CLI is where this engine started, but every hunt above can also be triggered from the dashboard instead of the terminal, a companion Next.js app that sits on top of this engine's REST API (`api.py`). It gives an analyst a full case-management workflow: run hunts from a web form instead of a prompt, track each finding as a case with a status (open, investigating, resolved, ignored), attach analyst notes, view MITRE ATT&CK patterns aggregated across every case, and see real AI cost tracked per investigation.
 
  ---
  
