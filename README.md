@@ -24,7 +24,7 @@ This tool is built primarily in Python, making it ideal for this type of work be
 
 ### The OpenAI API
 
-This is what gives the tool its reasoning ability. It's used in two separate steps. First, to decide which logs are relevant to a question. Second, to review the logs once they come back and explain what looks suspicious. Both of these are handled through OpenAI's API.
+This is what gives the tool its reasoning ability. It's used in two separate steps. First, to decide which logs are relevant to a request. Second, to review the logs once they come back and explain what looks suspicious.
 
 ### The Azure CLI
 
