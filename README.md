@@ -64,4 +64,4 @@ Every hunt has a real cost, since it involves a paid API. Before running the ana
 
 Everything described above was originally built to run in a terminal. It also connects to a web dashboard, which sits on top of this same engine and gives it a full interface: a page for running hunts, a running case history, analyst notes, and a summary of AI cost over time. The dashboard doesn't change how any of the above works. It calls into this same engine and displays what comes back.
  
-**Dashboard repo:** https://github.com/Colby-hin/agentic-soc-dashboard
+**Dashboard repo:** https://github.com/Colby-hin/agentic-threat-hunter-dashboard
