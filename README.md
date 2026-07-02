@@ -59,6 +59,11 @@ The logs that do come back get handed to the AI a second time, along with instru
 Every hunt has a real cost, since it involves a paid API. Before running the analysis step, the tool estimates how many tokens the request will use and checks that against the limits of the model being used. If the logs are too large for the smaller, cheaper model, the tool flags this and lets the analyst choose whether to switch to a larger one. This is a deliberate checkpoint. Nothing runs automatically without the analyst knowing roughly what it will cost first.
 
 ---
+## Flow Chart
+<img width="823" height="999" alt="Screenshot 2026-06-30 211728" src="https://github.com/user-attachments/assets/3a4116bd-7103-4eb1-989f-15bfc6a0dcf6" />
+
+
+---
 
 ## Also available as a dashboard
 
