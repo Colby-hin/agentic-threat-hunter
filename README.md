@@ -1,4 +1,4 @@
-# Agentic Threat Hunting Engine
+# Agentic SOC Engine
 
 ## What this is
 
