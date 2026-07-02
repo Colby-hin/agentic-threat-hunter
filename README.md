@@ -4,6 +4,9 @@
 
 This is a tool that lets a security analyst investigate potential threats by typing in plain English instead of writing a technical query by hand. Something like "check for suspicious logons in the last 24 hours" is enough. The tool figures out where to look, pulls the real security logs, and uses AI to review them and explain what it found.
 
+<img width="1372" height="484" alt="Screenshot 2026-06-29 202209" src="https://github.com/user-attachments/assets/fed71c88-f309-429f-9ba1-0cae971b45e6" />
+
+
 It was built for the kind of work a security operations team does. An analyst has suspicion, needs to check real data to confirm or rule it out, and then has to decide what to do next. This tool handles the repetitive middle part of that process so the analyst can spend more time on judgment and less time on typing out queries by hand.
 
 ## Tools and Services Used
@@ -37,11 +40,17 @@ This is a small library that counts how many tokens a piece of text will use bef
 
 When an analyst types a request, the AI doesn't just go run whatever it wants. It first has to propose a plan: which table to search, which fields to pull back, and how far back in time to look. It also has to explain its reasoning in plain language, which gets printed out so the choice can be checked before anything actually runs.
 
+<img width="1725" height="246" alt="image" src="https://github.com/user-attachments/assets/283e565a-2615-49a2-8bc5-799ee349a514" />
+
+
 That plan then gets checked against a fixed allow list before it's used. If the AI ever picks a table or a field that isn't permitted, the tool stops right there. It's allowed to suggest, but the code decides what's actually allowed to happen.
 
 Once a plan passes that check, a real query runs against Azure and pulls back the matching log records. If nothing comes back, the tool stops there too, instead of spending money running an AI review on an empty result.
 
-The logs that do come back get handed to the AI a second time, along with instructions specific to whatever table was searched. It reviews the actual data and returns something structured: a title, a description, a confidence level, a mapping to a known attack technique, and a list of recommended next steps.
+The logs that do come back get handed to the AI a second time, along with instructions specific to whatever table was searched. It reviews the actual data and returns something structured: a title, a description, a confidence level, and a mapping to a known attack technique.
+
+<img width="2269" height="604" alt="Screenshot 2026-06-29 203030" src="https://github.com/user-attachments/assets/bdcd4369-f95c-4d6d-907d-dca7cecda4e9" />
+
 
 ---
 
